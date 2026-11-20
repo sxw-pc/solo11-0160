@@ -74,7 +74,11 @@ def reconcile_occupancy(db,shelter_id):
 
 def reconcile_incident(db,incident):
     active=one(db,"SELECT * FROM activation WHERE incident=? AND state='active' ORDER BY version DESC LIMIT 1",(incident,))
-    if active:return
     for i in many(db,"SELECT * FROM intake WHERE incident=? AND state='admitted'",(incident,)):
-        db.execute("UPDATE intake SET state='needs_transfer',reason='activation no longer authoritative' WHERE id=?",(i['id'],))
-        log(db,'intake',i['person_id'],'needs_transfer','activation conflict invalidates new occupancy')
+        covered=active and one(db,"SELECT id FROM destination WHERE activation_id=? AND shelter_id=? AND state IN ('available','full')",(active['id'],i['shelter_id']))
+        if not covered:
+            db.execute("UPDATE intake SET state='needs_transfer',reason='activation destination no longer authoritative' WHERE id=?",(i['id'],))
+            target=choose_destination(db,incident,False,exclude=i['shelter_id']) if active else None
+            db.execute('INSERT INTO transfer(person_id,incident,from_shelter,to_shelter,state,reason) VALUES(?,?,?,?,?,?)',
+                       (i['person_id'],incident,i['shelter_id'],target,'planned' if target else 'unplaced','activation revision requires destination replan'))
+            log(db,'intake',i['person_id'],'needs_transfer','activation revision invalidates old destination')

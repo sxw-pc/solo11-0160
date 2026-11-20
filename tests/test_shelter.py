@@ -47,6 +47,13 @@ class ShelterTest(unittest.TestCase):
         self.events('intake-import',[{'id':'P2','kind':'person','person_id':'resident-2','incident':'storm-1','needs_accessible':False,'home_community':'ward-a'},
           {'id':'I2','kind':'admit','person_id':'resident-2','incident':'storm-1','shelter_id':'hall-b','at':'2026-04-01T10:00:00'}])
         self.assertEqual(report(self.db)['intake'][-1]['state'],'blocked')
+    def test_new_activation_revision_requires_destination_replan(self):
+        self.full()
+        self.events('activation-import',[{'id':'O3','kind':'order','incident':'storm-1','community':'ward-a','level':3,'version':2,'starts':'2026-04-01T08:00:00','ends':'2026-04-02T08:00:00','commander':'chief-a'}])
+        r=report(self.db)
+        self.assertEqual(r['activation'][-1]['state'],'active')
+        self.assertEqual(r['intake'][0]['state'],'needs_transfer')
+        self.assertEqual(r['transfer'][-1]['state'],'unplaced')
     def test_duplicate_cross_point_admission_and_supply(self):
         self.full();self.fixture('intake-import','intake-bad.json')
         r=report(self.db)

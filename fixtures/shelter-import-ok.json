@@ -1,0 +1,4 @@
+{"events":[
+{"id":"S1","kind":"shelter","shelter_id":"hall-a","community":"ward-a","beds":2,"accessible":1,"water":true,"version":1},
+{"id":"S2","kind":"shelter","shelter_id":"hall-b","community":"ward-a","beds":2,"accessible":1,"water":true,"version":1}
+]}

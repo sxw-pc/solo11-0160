@@ -22,7 +22,10 @@ def admit(db,e):
     db.execute('INSERT INTO intake(id,person_id,incident,shelter_id,at,state,reason) VALUES(?,?,?,?,?,?,?)',
                (e['id'],e['person_id'],e['incident'],e['shelter_id'],e['at'],state,reason))
     log(db,'intake',e['person_id'],state,reason,e['id'])
-    if state=='admitted':reconcile_destinations(db,e['shelter_id'])
+    if state=='admitted':
+        reconcile_destinations(db,e['shelter_id'])
+        from .resources import recompute_usage
+        recompute_usage(db,e['shelter_id'])
     return state
 
 def leave(db,e):
@@ -34,6 +37,8 @@ def leave(db,e):
         state='left'
         db.execute("UPDATE intake SET state='left',reason='witnessed exit' WHERE id=?",(i['id'],))
         reconcile_destinations(db,i['shelter_id'])
+        from .resources import recompute_usage
+        recompute_usage(db,i['shelter_id'])
     db.execute('INSERT INTO exit_record(id,intake_id,at,witness,state) VALUES(?,?,?,?,?)',(e['id'],i['id'],e['at'],e.get('witness',''),state))
     log(db,'intake',i['person_id'],state,'exit preserves past supply obligation',e['id'])
     return state
@@ -64,6 +69,8 @@ def reconcile_occupancy(db,shelter_id):
                            (i['person_id'],i['incident'],shelter_id,target,'planned' if target else 'unplaced','resource downgrade requires transfer'))
                 log(db,'intake',i['person_id'],'needs_transfer','resource downgrade changed intake decision')
     reconcile_destinations(db,shelter_id)
+    from .resources import recompute_usage
+    recompute_usage(db,shelter_id)
 
 def reconcile_incident(db,incident):
     active=one(db,"SELECT * FROM activation WHERE incident=? AND state='active' ORDER BY version DESC LIMIT 1",(incident,))

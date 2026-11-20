@@ -83,6 +83,8 @@ class ShelterTest(unittest.TestCase):
           {'id':'P4','kind':'person','person_id':'r4','incident':'storm-1','needs_accessible':False,'home_community':'ward-a'},
           {'id':'I4','kind':'admit','person_id':'r4','incident':'storm-1','shelter_id':'hall-a','at':'2026-04-01T09:10:00'}])
         self.assertEqual(report(self.db)['destination'][0]['state'],'full')
+        usage=[x for x in report(self.db)['capacity_usage'] if x['shelter_id']=='hall-a']
+        self.assertEqual(usage[-1]['remaining_beds'],0)
     def test_replay_audit_detects_forged_transfer(self):
         self.full();self.fixture('shelter-import','shelter-bad.json')
         self.assertTrue(audit(self.db,HANDLERS)['replay_ok'])

@@ -2,7 +2,7 @@ import hashlib
 import json
 from .store import connect,many
 from .source import ingest
-TABLES=['shelter','fault','capacity','activation','destination','person','intake','exit_record','supply','transfer','decision_log']
+TABLES=['shelter','fault','capacity','capacity_usage','activation','destination','person','intake','exit_record','supply','transfer','decision_log']
 def report(db):
     r={t:[dict(x) for x in many(db,f'SELECT * FROM {t} ORDER BY rowid')] for t in TABLES}
     r['event']=[dict(x) for x in many(db,'SELECT id,kind,sha FROM event ORDER BY rowid')]
@@ -20,4 +20,5 @@ def audit(db,handlers):
     old,new=report(db),report(replay)
     for r in (old,new):
         for d in r['decision_log']:d.pop('at',None)
+    replay.close()
     return {'replay_ok':old==new,'mismatches':[k for k in old if old[k]!=new[k]],'event_count':len(old['event'])}

@@ -41,4 +41,19 @@ def recompute(db,shelter_id,event_id=None):
         reconcile_occupancy(db,shelter_id)
         from .activation import reconcile_destinations
         reconcile_destinations(db,shelter_id)
+        recompute_usage(db,shelter_id)
+    return state
+
+def recompute_usage(db,shelter_id):
+    cap=one(db,'SELECT * FROM capacity WHERE shelter_id=? ORDER BY id DESC LIMIT 1',(shelter_id,))
+    if not cap:return
+    admitted=many(db,"SELECT p.needs_accessible FROM intake i JOIN person p ON p.id=i.person_id AND p.incident=i.incident WHERE i.shelter_id=? AND i.state IN ('admitted','needs_transfer')",(shelter_id,))
+    remaining=max(0,cap['beds']-len(admitted))
+    accessible=max(0,cap['accessible']-sum(x['needs_accessible'] for x in admitted))
+    state='full' if remaining==0 else 'limited' if accessible==0 else 'available'
+    old=one(db,'SELECT * FROM capacity_usage WHERE shelter_id=? ORDER BY id DESC LIMIT 1',(shelter_id,))
+    if not old or (old['remaining_beds'],old['remaining_accessible'],old['state'])!=(remaining,accessible,state):
+        db.execute('INSERT INTO capacity_usage(shelter_id,remaining_beds,remaining_accessible,state,reason) VALUES(?,?,?,?,?)',
+                   (shelter_id,remaining,accessible,state,'current verified occupancy and resource capacity'))
+        log(db,'resources',shelter_id,state,'intake or fault changed remaining resource capacity')
     return state

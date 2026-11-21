@@ -1,0 +1,6 @@
+{
+  "events":[
+    {"id":"HB-A","kind":"heartbeat","shelter_id":"hall-a","observed":"heard"},
+    {"id":"HB-B","kind":"heartbeat","shelter_id":"hall-a","observed":"missing"}
+  ]
+}

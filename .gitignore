@@ -1,0 +1,14 @@
+*.sqlite
+*.db
+__pycache__/
+*.egg-info/
+build/
+.venv/
+venv/
+node_modules/
+*.pyc
+.pytest_cache/
+.coverage
+.benchmarks/
+.env
+dist/

@@ -1,0 +1,11 @@
+{
+  "desk": "hall-a",
+  "tx_a_enabled": [0,3],
+  "tx_b_enabled": [2,6],
+  "log_slots": [0,1,2,3,4,5,6],
+  "beacon_tones": [1,4],
+  "turnaround_range": [0,2],
+  "same_prefix": {"slot":2,"reader":"shared","status":"answered","tone":1},
+  "cold_reader_keeps_pending_frames": true,
+  "loopback_control_consumes_response_slot": true
+}

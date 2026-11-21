@@ -1,0 +1,9 @@
+{"events":[
+{"id":"PAIR-BAD","kind":"pair-round","shelter_id":"hall-a","round_id":"R2","mode":"paired_fixed_camera",
+ "turntable":{"houses":2,"shared_stop":false},
+ "binding":{"witness":"site-w1","round_id":"R2","orientation":"straight","sides":"both"},
+ "images":[
+  {"image_id":"IMG-B1","lane":"left","orientation":"straight","readings":[{"code":"v7","page_side":"outer"}]},
+  {"image_id":"IMG-B2","lane":"right","orientation":"turned","readings":[{"code":"v8","page_side":"outer"}]}
+ ]}
+]}

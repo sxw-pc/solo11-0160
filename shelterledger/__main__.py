@@ -4,9 +4,14 @@ import json
 from pathlib import Path
 from .store import connect
 from .source import read_file,ingest
-from . import resources,activation,intake,report,carrier_source
+from . import resources,activation,intake,report,carrier_source,carrier_pair_capture
 HANDLERS={
- 'carrier-import':{'label-read':carrier_source.observe},
+ 'carrier-import':{'label-read':carrier_source.observe,
+                   'pair-round':carrier_source.observe,
+                   'pair-image':carrier_source.observe,
+                   'split-start':carrier_source.observe,
+                   'split-interrupt':carrier_source.observe,
+                   'split-receipt':carrier_source.observe},
  'shelter-import':{'shelter':resources.shelter,'fault':resources.fault,'repair':resources.repair},
  'activation-import':{'order':activation.order,'destination':activation.destination},
  'intake-import':{'person':intake.person,'admit':intake.admit,'leave':intake.leave,'supply':intake.supply},
@@ -23,7 +28,7 @@ def import_file(db,command,path):
         db.execute('INSERT INTO source_file(command,sha,raw) VALUES(?,?,?)',(command,sha,raw))
     return results
 def main(argv=None):
-    p=argparse.ArgumentParser();p.add_argument('command',choices=[*HANDLERS,'demo','report','audit']);p.add_argument('--db',default='shelter.sqlite');p.add_argument('--file')
+    p=argparse.ArgumentParser();p.add_argument('command',choices=[*HANDLERS,'demo','report','audit','carrier-receipt']);p.add_argument('--db',default='shelter.sqlite');p.add_argument('--file');p.add_argument('--round')
     args=p.parse_args(argv);db=connect(args.db)
     if args.command=='demo':
         results=[]
@@ -32,6 +37,8 @@ def main(argv=None):
         result={'outcomes':results,'report':report.report(db)}
     elif args.command=='report':result=report.report(db)
     elif args.command=='audit':result=report.audit(db,HANDLERS)
+    elif args.command=='carrier-receipt':
+        result={'round':carrier_pair_capture.show(db,args.round),'receipt':carrier_pair_capture.receipt(db)}
     else:
         if not args.file:p.error('--file required')
         result={'outcomes':import_file(db,args.command,args.file),'report':report.report(db)}

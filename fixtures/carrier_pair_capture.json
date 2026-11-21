@@ -1,0 +1,30 @@
+{
+ "simulation": "two empty carrier props share one optical turntable",
+ "legal_captures": ["paired_fixed_camera", "separate_envelopes"],
+ "limits": {"carriers": 2, "rounds": 2, "interruptions": 1, "label_images": 4, "splits": 1},
+ "capture_one": {
+  "mode": "paired_fixed_camera",
+  "turntable": {"houses": 2, "shared_stop": true, "cameras": ["left_fixed", "right_fixed"]},
+  "images": [
+   {"image_id": "IMG-1", "camera": "left_fixed", "readings": [{"code": "v7", "page_side": "outer"}]},
+   {"image_id": "IMG-2", "camera": "right_fixed", "readings": [
+     {"code": "v8", "page_side": "inner_reflection"},
+     {"code": "v8", "page_side": "outer"}]}
+  ],
+  "expected": "two sleeves, left v7 and right v8, only because both fixed cameras share one witnessed stop"
+ },
+ "capture_two": {
+  "mode": "separate_envelopes",
+  "precondition": "the lost shared-stop round printed nothing, so the one authorised split is still available",
+  "envelope_receipt": {"position": "left", "code": "v7", "envelope_serial": "ENV-1", "witness": "site-w2"},
+  "sealed_image": {"image_id": "IMG-3", "readings": [{"code": "v7", "page_side": "outer"}],
+                   "envelope_serial": "ENV-1"},
+  "expected": "one sleeve, left v7; the right position stays unconfirmed and the original paired source cannot be re-filmed"
+ },
+ "not_allowed": [
+  "mirroring the two nearest positions from screenshots taken at different stops",
+  "using label order inside one frame or an inner-page reflection to choose an edge",
+  "unconditional second split after an interrupted split without a physical receipt",
+  "rewriting an issued sleeve from a late image"
+ ]
+}

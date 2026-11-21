@@ -1,0 +1,7 @@
+{"events":[
+{"id":"PX","kind":"person","person_id":"X","incident":"storm-9","needs_accessible":false,"home_community":"ward-c"},
+{"id":"IX","kind":"admit","person_id":"X","incident":"storm-9","shelter_id":"SX","at":"2026-04-10T09:00:00"},
+{"id":"ASG-X","kind":"bed_assign","incident":"storm-9","person_id":"X","shelter_id":"SX","bed_no":"x1","at":"2026-04-10T09:00:30","witness":"sx-keeper"},
+{"id":"GATE-X","kind":"gate","incident":"storm-9","person_id":"X","shelter_id":"SX","direction":"out","at_lo":"2026-04-10T10:08:00","lo_inclusive":false,"at_hi":"2026-04-10T10:18:00","hi_inclusive":true,"witness":"sx-gate-cam"},
+{"id":"ARR-X","kind":"arrival","incident":"storm-9","person_id":"X","shelter_id":"SY","at_lo":"2026-04-10T10:05:00","lo_inclusive":true,"at_hi":"2026-04-10T10:07:00","hi_inclusive":true,"witness":"sy-gate-cam"}
+]}

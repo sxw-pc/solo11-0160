@@ -33,10 +33,22 @@ def destination(db,e):
     log(db,'activation',e['id'],state,reason,e['id'])
     return state
 
+def _has_bed_cards(db,shelter_id):
+    return bool(one(db,'SELECT 1 FROM bed_card WHERE shelter_id=? AND state=? LIMIT 1',(shelter_id,'active')))
+
+def _bedcard_occupied(db,shelter_id):
+    v=one(db,'SELECT MAX(version) AS v FROM adjudication_version')
+    if not v:return 0
+    return one(db,"SELECT COUNT(DISTINCT bed_no) AS n FROM bed_interval WHERE version=? AND shelter_id=? AND kind='occupied' AND hi IS NULL",
+               (v['v'],shelter_id))['n']
+
 def reconcile_destinations(db,shelter_id):
     capacity=one(db,'SELECT * FROM capacity WHERE shelter_id=? ORDER BY id DESC LIMIT 1',(shelter_id,))
     if not capacity:return
-    occupied=one(db,"SELECT COUNT(*) AS n FROM intake WHERE shelter_id=? AND state IN ('admitted','needs_transfer')",(shelter_id,))['n']
+    if _has_bed_cards(db,shelter_id):
+        occupied=_bedcard_occupied(db,shelter_id)
+    else:
+        occupied=one(db,"SELECT COUNT(*) AS n FROM intake WHERE shelter_id=? AND state IN ('admitted','needs_transfer')",(shelter_id,))['n']
     for d in many(db,"SELECT * FROM destination WHERE shelter_id=? AND state IN ('available','full','closed')",(shelter_id,)):
         state='closed' if capacity['state']=='closed' else 'full' if occupied>=capacity['beds'] else 'available'
         if state!=d['state']:
@@ -49,7 +61,11 @@ def choose_destination(db,incident,accessible,exclude=None):
     for d in many(db,"SELECT * FROM destination WHERE activation_id=? AND state='available' ORDER BY priority,id",(active['id'],)):
         if d['shelter_id']==exclude:continue
         cap=one(db,'SELECT * FROM capacity WHERE shelter_id=? ORDER BY id DESC LIMIT 1',(d['shelter_id'],))
-        occupied=one(db,"SELECT COUNT(*) AS n FROM intake WHERE shelter_id=? AND state IN ('admitted','needs_transfer')",(d['shelter_id'],))['n']
-        accessible_used=one(db,"SELECT COUNT(*) AS n FROM intake i JOIN person p ON p.id=i.person_id AND p.incident=i.incident WHERE i.shelter_id=? AND i.state IN ('admitted','needs_transfer') AND p.needs_accessible=1",(d['shelter_id'],))['n']
+        if _has_bed_cards(db,d['shelter_id']):
+            occupied=_bedcard_occupied(db,d['shelter_id'])
+            accessible_used=0  # 无障碍床的精确匹配由床卡准入合同在证据层处理
+        else:
+            occupied=one(db,"SELECT COUNT(*) AS n FROM intake WHERE shelter_id=? AND state IN ('admitted','needs_transfer')",(d['shelter_id'],))['n']
+            accessible_used=one(db,"SELECT COUNT(*) AS n FROM intake i JOIN person p ON p.id=i.person_id AND p.incident=i.incident WHERE i.shelter_id=? AND i.state IN ('admitted','needs_transfer') AND p.needs_accessible=1",(d['shelter_id'],))['n']
         if occupied<cap['beds'] and (not accessible or accessible_used<cap['accessible']):return d['shelter_id']
     return None

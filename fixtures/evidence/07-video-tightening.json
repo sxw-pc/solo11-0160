@@ -1,0 +1,3 @@
+{"events":[
+{"id":"GATE-A-VIDEO","kind":"gate","incident":"storm-2","person_id":"A","shelter_id":"S1","direction":"out","at_lo":"2026-04-10T10:08:00","lo_inclusive":false,"at_hi":"2026-04-10T10:14:00","hi_inclusive":true,"witness":"independent-video-review"}
+]}

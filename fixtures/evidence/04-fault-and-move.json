@@ -1,0 +1,4 @@
+{"events":[
+{"id":"BF-B1","kind":"bed_fault","shelter_id":"S1","bed_no":"b1","fault_kind":"structural","at":"2026-04-10T10:00:00","witness":"s1-engineer"},
+{"id":"F-AGG","kind":"fault","shelter_id":"S1","fault_kind":"structural","beds_lost":1,"accessible_lost":0,"at":"2026-04-10T10:00:10"}
+]}

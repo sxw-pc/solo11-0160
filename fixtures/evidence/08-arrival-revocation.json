@@ -1,0 +1,3 @@
+{"events":[
+{"id":"REV-ARR","kind":"revoke","target_kind":"arrival_record","target_id":"ARR-A-S2","at":"2026-04-10T11:00:00","witness":"s2-auditor","reason":"receipt original withdrawn after recheck"}
+]}

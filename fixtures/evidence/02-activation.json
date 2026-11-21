@@ -1,0 +1,6 @@
+{"events":[
+{"id":"O1","kind":"order","incident":"storm-2","community":"ward-a","level":2,"version":1,"starts":"2026-04-10T07:00:00","ends":"2026-04-11T19:00:00","commander":"chief-a"},
+{"id":"D1","kind":"destination","activation_id":"O1","shelter_id":"S1","priority":1},
+{"id":"D2","kind":"destination","activation_id":"O1","shelter_id":"S2","priority":2},
+{"id":"D3","kind":"destination","activation_id":"O1","shelter_id":"S3","priority":3}
+]}

@@ -1,0 +1,9 @@
+{"events":[
+{"id":"BC-S1-B1","kind":"bed_card","shelter_id":"S1","bed_no":"b1","accessible":false,"at":"2026-04-10T08:00:00","witness":"s1-keeper"},
+{"id":"BC-S1-B2","kind":"bed_card","shelter_id":"S1","bed_no":"b2","accessible":false,"at":"2026-04-10T08:00:00","witness":"s1-keeper"},
+{"id":"BC-S1-B3","kind":"bed_card","shelter_id":"S1","bed_no":"b3","accessible":true,"at":"2026-04-10T08:00:00","witness":"s1-keeper"},
+{"id":"BC-S2-B1","kind":"bed_card","shelter_id":"S2","bed_no":"b1","accessible":true,"at":"2026-04-10T08:00:00","witness":"s2-keeper"},
+{"id":"S1D","kind":"shelter","shelter_id":"S1","community":"ward-a","beds":3,"accessible":1,"water":true,"version":1},
+{"id":"S2D","kind":"shelter","shelter_id":"S2","community":"ward-a","beds":1,"accessible":1,"water":true,"version":1},
+{"id":"S3D","kind":"shelter","shelter_id":"S3","community":"ward-a","beds":1,"accessible":0,"water":true,"version":1}
+]}

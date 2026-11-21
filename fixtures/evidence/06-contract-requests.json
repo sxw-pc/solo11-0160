@@ -1,0 +1,4 @@
+{"events":[
+{"id":"REQ-A-1015","kind":"admission_request","incident":"storm-2","person_id":"newcomer-1","shelter_id":"S1","contract":"A-realtime","at":"2026-04-10T10:15:00"},
+{"id":"REQ-B-1015","kind":"admission_request","incident":"storm-2","person_id":"newcomer-2","shelter_id":"S1","contract":"B-contingency","at":"2026-04-10T10:15:00"}
+]}

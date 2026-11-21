@@ -1,0 +1,7 @@
+{"events":[
+{"id":"S4D","kind":"shelter","shelter_id":"S4","community":"ward-b","beds":4,"accessible":1,"water":true,"version":1},
+{"id":"BC-S4-C1","kind":"bed_card","shelter_id":"S4","bed_no":"c1","accessible":false,"at":"2026-04-10T08:00:00","witness":"s4-keeper"},
+{"id":"BC-S4-C2","kind":"bed_card","shelter_id":"S4","bed_no":"c2","accessible":false,"at":"2026-04-10T08:00:00","witness":"s4-keeper"},
+{"id":"BC-S4-C3","kind":"bed_card","shelter_id":"S4","bed_no":"c3","accessible":true,"at":"2026-04-10T08:00:00","witness":"s4-keeper"},
+{"id":"BC-S4-C4","kind":"bed_card","shelter_id":"S4","bed_no":"c4","accessible":false,"at":"2026-04-10T08:00:00","witness":"s4-keeper"}
+]}

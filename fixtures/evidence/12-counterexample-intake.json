@@ -1,0 +1,11 @@
+{"events":[
+{"id":"P4A","kind":"person","person_id":"A4","incident":"storm-3","needs_accessible":false,"home_community":"ward-b"},
+{"id":"P4B","kind":"person","person_id":"B4","incident":"storm-3","needs_accessible":false,"home_community":"ward-b"},
+{"id":"P4C","kind":"person","person_id":"C4","incident":"storm-3","needs_accessible":true,"home_community":"ward-b"},
+{"id":"I4A","kind":"admit","person_id":"A4","incident":"storm-3","shelter_id":"S4","at":"2026-04-10T09:00:00"},
+{"id":"I4B","kind":"admit","person_id":"B4","incident":"storm-3","shelter_id":"S4","at":"2026-04-10T09:10:00"},
+{"id":"I4C","kind":"admit","person_id":"C4","incident":"storm-3","shelter_id":"S4","at":"2026-04-10T09:20:00"},
+{"id":"ASG-A4","kind":"bed_assign","incident":"storm-3","person_id":"A4","shelter_id":"S4","bed_no":"c1","at":"2026-04-10T09:00:30","witness":"s4-keeper"},
+{"id":"ASG-B4","kind":"bed_assign","bed_no":"c2","at":"2026-04-10T09:10:30","witness":"s4-keeper","incident":"storm-3","person_id":"B4","shelter_id":"S4"},
+{"id":"ASG-C4","kind":"bed_assign","incident":"storm-3","person_id":"C4","shelter_id":"S4","bed_no":"c3","at":"2026-04-10T09:20:30","witness":"s4-keeper"}
+]}

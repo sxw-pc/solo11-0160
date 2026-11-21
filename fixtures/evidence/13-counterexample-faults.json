@@ -1,0 +1,5 @@
+{"events":[
+{"id":"F4-AGG","kind":"fault","shelter_id":"S4","fault_kind":"structural","beds_lost":2,"accessible_lost":0,"at":"2026-04-10T12:00:00"},
+{"id":"BF4-C1","kind":"bed_fault","shelter_id":"S4","bed_no":"c1","fault_kind":"structural","at":"2026-04-10T12:00:05","witness":"s4-engineer"},
+{"id":"BF4-C4","kind":"bed_fault","shelter_id":"S4","bed_no":"c4","fault_kind":"structural","at":"2026-04-10T12:00:05","witness":"s4-engineer"}
+]}

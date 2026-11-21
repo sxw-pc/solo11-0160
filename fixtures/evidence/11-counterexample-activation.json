@@ -1,0 +1,4 @@
+{"events":[
+{"id":"O4","kind":"order","incident":"storm-3","community":"ward-b","level":2,"version":1,"starts":"2026-04-10T07:00:00","ends":"2026-04-11T19:00:00","commander":"chief-b"},
+{"id":"D4","kind":"destination","activation_id":"O4","shelter_id":"S4","priority":1}
+]}

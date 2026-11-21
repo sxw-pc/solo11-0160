@@ -1,0 +1,8 @@
+{"events":[
+{"id":"PA","kind":"person","person_id":"A","incident":"storm-2","needs_accessible":false,"home_community":"ward-a"},
+{"id":"PB","kind":"person","person_id":"B","incident":"storm-2","needs_accessible":false,"home_community":"ward-a"},
+{"id":"IA","kind":"admit","person_id":"A","incident":"storm-2","shelter_id":"S1","at":"2026-04-10T09:00:00"},
+{"id":"IB","kind":"admit","person_id":"B","incident":"storm-2","shelter_id":"S1","at":"2026-04-10T09:01:00"},
+{"id":"ASG-A-B1","kind":"bed_assign","incident":"storm-2","person_id":"A","shelter_id":"S1","bed_no":"b1","at":"2026-04-10T09:00:30","witness":"s1-keeper","source":"field"},
+{"id":"ASG-B-B2","kind":"bed_assign","incident":"storm-2","person_id":"B","shelter_id":"S1","bed_no":"b2","at":"2026-04-10T09:01:30","witness":"s1-keeper","source":"field"}
+]}

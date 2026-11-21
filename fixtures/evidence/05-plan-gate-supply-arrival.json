@@ -1,0 +1,9 @@
+{"events":[
+{"id":"MV-A-B3","kind":"bed_move","from_assignment_id":"ASG-A-B1","incident":"storm-2","person_id":"A","shelter_id":"S1","bed_no":"b3","at":"2026-04-10T10:05:00","witness":"s1-keeper"},
+{"id":"TP-A","kind":"transfer_plan","incident":"storm-2","person_id":"A","from_shelter":"S1","to_shelter":"S2","bed_no":"b1","at":"2026-04-10T10:06:00","witness":"duty-officer"},
+{"id":"GATE-A-1","kind":"gate","incident":"storm-2","person_id":"A","shelter_id":"S1","direction":"out","at_lo":"2026-04-10T10:08:00","lo_inclusive":false,"at_hi":"2026-04-10T10:18:00","hi_inclusive":true,"witness":"s1-gate-cam"},
+{"id":"SUP-A-S1","kind":"supply","person_id":"A","incident":"storm-2","supply_kind":"water-kit","qty":1,"at":"2026-04-10T10:12:00","signature":"A-sign","shelter_id":"S1"},
+{"id":"ARR-A-S2","kind":"arrival","incident":"storm-2","person_id":"A","shelter_id":"S2","at_lo":"2026-04-10T10:20:00","lo_inclusive":true,"at_hi":"2026-04-10T10:30:00","hi_inclusive":true,"witness":"s2-gate-cam"},
+{"id":"SUP-A-S2","kind":"supply","person_id":"A","incident":"storm-2","supply_kind":"water-kit","qty":1,"at":"2026-04-10T10:25:00","signature":"A-sign","shelter_id":"S2"},
+{"id":"SUP-A-S2-DUP","kind":"supply","person_id":"A","incident":"storm-2","supply_kind":"water-kit","qty":1,"at":"2026-04-10T10:26:00","signature":"A-sign","shelter_id":"S2"}
+]}

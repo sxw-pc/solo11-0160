@@ -6,7 +6,7 @@ from .store import connect
 from .source import read_file,ingest
 from . import resources,activation,intake,report,survey_capture
 HANDLERS={
- 'survey-import':{'tally':survey_capture.capture},
+ 'survey-import':{'tally':survey_capture.capture,'sheet':survey_capture.sheet,'notice':survey_capture.notice,'request':survey_capture.request},
  'shelter-import':{'shelter':resources.shelter,'fault':resources.fault,'repair':resources.repair},
  'activation-import':{'order':activation.order,'destination':activation.destination},
  'intake-import':{'person':intake.person,'admit':intake.admit,'leave':intake.leave,'supply':intake.supply},

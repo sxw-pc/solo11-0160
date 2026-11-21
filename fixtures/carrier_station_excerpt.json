@@ -1,0 +1,9 @@
+{
+ "simulation": "two empty carrier props at an optical turntable",
+ "lanes": ["left", "right"],
+ "label_faces": ["outer", "inner"],
+ "camera_saw": [["both","v7","v8"],["left","v7"]],
+ "shared_turntable_end_stop": ["straight","turned"],
+ "next_available_modes": ["paired_fixed_camera", "separate_envelopes"],
+ "splitting_permitted_once": true
+}

@@ -1,0 +1,4 @@
+{"events":[
+{"id":"I2","kind":"admit","person_id":"resident-1","incident":"storm-1","shelter_id":"hall-b","at":"2026-04-01T09:20:00"},
+{"id":"Q2","kind":"supply","person_id":"resident-1","incident":"storm-1","supply_kind":"water-kit","qty":2,"at":"2026-04-01T09:30:00","signature":"resident-sign"}
+]}

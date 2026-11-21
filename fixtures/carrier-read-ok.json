@@ -1,0 +1,6 @@
+{
+ "events":[
+   {"id":"L-I","kind":"label-read","slot":"desk-position-one","shelter_id":"hall-a","labels_seen":["v7"]},
+   {"id":"L-II","kind":"label-read","slot":"desk-position-one","shelter_id":"hall-a","labels_seen":["v7","v8"]}
+ ]
+}

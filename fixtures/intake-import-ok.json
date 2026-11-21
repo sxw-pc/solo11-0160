@@ -1,0 +1,5 @@
+{"events":[
+{"id":"P1","kind":"person","person_id":"resident-1","incident":"storm-1","needs_accessible":true,"home_community":"ward-a"},
+{"id":"I1","kind":"admit","person_id":"resident-1","incident":"storm-1","shelter_id":"hall-a","at":"2026-04-01T09:00:00"},
+{"id":"Q1","kind":"supply","person_id":"resident-1","incident":"storm-1","supply_kind":"water-kit","qty":1,"at":"2026-04-01T09:10:00","signature":"resident-sign"}
+]}

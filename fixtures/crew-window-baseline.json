@@ -1,0 +1,10 @@
+{
+ "events": [
+  {"id":"desk-left","kind":"crew_window","team":"utility-crew","sheet_minutes":10,"claim_minutes":20,"witness":"desk-l","start":0,"stop":10},
+  {"id":"desk-right","kind":"crew_window","team":"utility-crew","sheet_minutes":10,"claim_minutes":20,"witness":"desk-r","start":0,"stop":10}
+ ],
+ "overlap_examples": {
+   "same_worker":{"minute_total":10},
+   "distinct_workers":{"minute_total":20}
+ }
+}

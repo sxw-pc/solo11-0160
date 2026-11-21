@@ -1,0 +1,6 @@
+{
+ "events":[
+   {"id":"COUNT-A","kind":"tally","round_id":"wk-1","yes":2,"respondents":4,"reader":"desk-q"},
+   {"id":"COUNT-B","kind":"tally","round_id":"wk-1","yes":2,"respondents":2,"reader":"desk-q"}
+ ]
+}

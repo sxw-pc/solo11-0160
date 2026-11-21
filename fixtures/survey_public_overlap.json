@@ -1,0 +1,11 @@
+{
+ "simulation":"six opaque response positions, no names",
+ "respondents":["a","b","c","d","e","f"],
+ "kept_public":[{"sites":["a","b","c"],"exact":2}],
+ "candidate":[
+  {"sites":["a","b","c","d"],"reported":2},
+  {"sites":["d","e","f"],"reported":1}
+ ],
+ "protected_position":"d",
+ "demand_trigger_at":2
+}

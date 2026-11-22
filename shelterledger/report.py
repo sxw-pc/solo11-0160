@@ -3,7 +3,7 @@ import json
 from .store import connect,many
 from .source import ingest
 from .comms_desk import setup
-TABLES=['shelter','fault','capacity','capacity_usage','activation','destination','person','intake','exit_record','supply','transfer','decision_log','comms_followup']
+TABLES=['shelter','fault','capacity','capacity_usage','activation','destination','person','intake','exit_record','supply','transfer','decision_log','comms_followup','beacon_bench','beacon_request','beacon_observation','beacon_interruption','beacon_work_order','beacon_proof','beacon_consumed_slot']
 def report(db):
     setup(db)
     r={t:[dict(x) for x in many(db,f'SELECT * FROM {t} ORDER BY rowid')] for t in TABLES}

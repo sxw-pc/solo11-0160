@@ -6,7 +6,7 @@ from .store import connect
 from .source import read_file,ingest
 from . import resources,activation,intake,report,beacon
 HANDLERS={
- 'beacon-import':{'heartbeat':beacon.capture},
+ 'beacon-import':{'heartbeat':beacon.capture,'bench':beacon.bench,'beacon_request':beacon.request,'interruption':beacon.interruption,'probe':beacon.probe,'readback':beacon.readback},
  'shelter-import':{'shelter':resources.shelter,'fault':resources.fault,'repair':resources.repair},
  'activation-import':{'order':activation.order,'destination':activation.destination},
  'intake-import':{'person':intake.person,'admit':intake.admit,'leave':intake.leave,'supply':intake.supply},

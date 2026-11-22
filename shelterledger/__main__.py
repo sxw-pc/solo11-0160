@@ -4,9 +4,10 @@ import json
 from pathlib import Path
 from .store import connect
 from .source import read_file,ingest
-from . import resources,activation,intake,report,crew_source
+from . import resources,activation,intake,report,crew_source,crew_credit
 HANDLERS={
- 'crew-import':{'crew_window':crew_source.capture},
+ 'crew-import':{kind:crew_source.capture for kind in
+   ('crew_window','badge_anchor','station_witness','button_receipt','backup_retrieval','witness_resign')},
  'shelter-import':{'shelter':resources.shelter,'fault':resources.fault,'repair':resources.repair},
  'activation-import':{'order':activation.order,'destination':activation.destination},
  'intake-import':{'person':intake.person,'admit':intake.admit,'leave':intake.leave,'supply':intake.supply},
@@ -23,7 +24,7 @@ def import_file(db,command,path):
         db.execute('INSERT INTO source_file(command,sha,raw) VALUES(?,?,?)',(command,sha,raw))
     return results
 def main(argv=None):
-    p=argparse.ArgumentParser();p.add_argument('command',choices=[*HANDLERS,'demo','report','audit']);p.add_argument('--db',default='shelter.sqlite');p.add_argument('--file')
+    p=argparse.ArgumentParser();p.add_argument('command',choices=[*HANDLERS,'demo','report','audit','crew-cert']);p.add_argument('--db',default='shelter.sqlite');p.add_argument('--file');p.add_argument('--team')
     args=p.parse_args(argv);db=connect(args.db)
     if args.command=='demo':
         results=[]
@@ -32,6 +33,14 @@ def main(argv=None):
         result={'outcomes':results,'report':report.report(db)}
     elif args.command=='report':result=report.report(db)
     elif args.command=='audit':result=report.audit(db,HANDLERS)
+    elif args.command=='crew-cert':
+        if args.team:
+            result={'certificates':[crew_credit.certificate(db,args.team)],
+                    'next_shift_actions':crew_credit.next_shift_actions(db,args.team)}
+        else:
+            result={'certificates':[crew_credit.certificate(db,row['team'],row['shift'])
+                                    for row in db.execute('SELECT team,shift FROM crew_credit ORDER BY team,shift')],
+                    'next_shift_actions':None}
     else:
         if not args.file:p.error('--file required')
         result={'outcomes':import_file(db,args.command,args.file),'report':report.report(db)}
